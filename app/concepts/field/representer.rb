@@ -1,8 +1,14 @@
 require 'representable/json'
 
 class Field < ActiveRecord::Base
-  class Show < Trailblazer::Operation
-    class ShowRepresenter < Representable::Decorator
+  module Representer
+    class Create < Representable::Decorator
+      include JSON
+
+      property :id
+    end
+
+    class Show < Representable::Decorator
       include JSON
 
       property :name

@@ -19,7 +19,7 @@ class Field < ActiveRecord::Base
     model Field, :find
 
     include Trailblazer::Operation::Representer
-    representer ShowRepresenter
+    representer Representer::Show
 
     def process(*)
     end

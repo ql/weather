@@ -1,3 +1,2 @@
-class JsonController < ApplicationController
-  respond_to :json
+class JsonController < ActionController::API
 end

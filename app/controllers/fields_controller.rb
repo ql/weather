@@ -1,21 +1,24 @@
 class FieldsController < JsonController
+  respond_to :json
+
   def index
   end
 
   def create
-    run Comment::Create
+    new_params = {field: {name: params[:field][:name], boundary: params[:field][:boundary].to_unsafe_h}}
+    respond Field::Create, params: new_params, is_document: false
   end
 
   def show
-    run Comment::Show
+    respond Field::Show
   end
 
   def update
-    run Comment::Update
+    run Field::Update
   end
 
   def delete
-    run Comment::Delete
+    run Field::Delete
   end
 
   def import
