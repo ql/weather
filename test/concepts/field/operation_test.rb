@@ -46,4 +46,28 @@ class FieldOperationTest < MiniTest::Spec
       json.must_equal({"name"=>"TestField", "area"=>364044.06, "center_lat"=>55.55755538087183, "center_lon"=>37.40004197201306}.to_json)
     end
   end
+
+  describe "Update" do
+    it "updates field" do
+      f = field
+
+      res, op = ::Field::Update.run(
+        id: f.id,
+        field: {
+          name: "NewName"
+        }
+      )
+      res.must_equal true
+      op.model.name.must_equal "NewName"
+    end
+  end
+
+  describe "Delete" do
+    it "deletes field" do
+      f = field
+
+      deleted = ::Field::Delete.(id: f.id).model
+      deleted.destroyed?.must_equal true
+    end
+  end
 end
