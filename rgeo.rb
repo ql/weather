@@ -118,3 +118,4 @@ rus_f = RGeo::Geographic.projected_factory(projection_proj4: proj4)
 features = RGeo::GeoJSON.decode(json, json_parser: :json)
 projected = RGeo::Feature.cast features[0].geometry, factory: rus_f
 p projected.area
+p projected.centroid
