@@ -6,7 +6,9 @@ class FieldsController < JsonController
 
   def create
     new_params = {field: {name: params[:field][:name], boundary: params[:field][:boundary].to_unsafe_h}}
-    respond Field::Create, params: new_params, is_document: false
+    run Field::Create, params: new_params, is_document: false do |op|
+      render json: {id: op.model.id}
+    end
   end
 
   def show
