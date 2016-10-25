@@ -1,3 +1,4 @@
+require 'rgeo'
 require 'rgeo-geojson'
 require 'json'
 
@@ -113,6 +114,45 @@ json = JSON.parse('{
     }
   ]
 }')
+
+
+json = JSON.parse('{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              37.39368438720703,
+              55.556553924702854
+            ],
+            [
+              37.39909172058105,
+              55.561068368411846
+            ],
+            [
+              37.40715980529785,
+              55.55927236153912
+            ],
+            [
+              37.39943504333496,
+              55.55344690945121
+            ],
+            [
+              37.39368438720703,
+              55.556553924702854
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}')
+
 proj4 = '+proj=aea +lat_1=50 +lat_2=70 +lat_0=56 +lon_0=100 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs '
 rus_f = RGeo::Geographic.projected_factory(projection_proj4: proj4)
 features = RGeo::GeoJSON.decode(json, json_parser: :json)
