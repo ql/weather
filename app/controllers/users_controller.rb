@@ -2,19 +2,21 @@ class UsersController < JsonController
   respond_to :json
 
   def sign_up
-    o = run User::SignUp do |op|
-      render json: {status: :success}
+    op = run User::SignUp do |o|
+      render({json: {status: :success, id: o.model.id}})
+      return
     end
 
-    render json: {errors: o.model.errors}
+    render json: {errors: op.errors}
   end
 
   def sign_in
-    run User::SignIn do |op|
+    op = run User::SignIn do |op|
       render json: {token:  op.model.token}
+      return
     end
 
-    render json: {status: :fail}
+    render json: {status: :fail, errors: op.errors}
   end
 
   def sign_out
