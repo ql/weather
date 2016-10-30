@@ -25,7 +25,7 @@ class UsersControllerTest < ActionController::TestCase
       user = ::User::SignUp.(user: { name:     "Test User", email:    "valid3@example.com", password: "qwerty"} ).model
 
       post "sign_in", params: {session: {email: "valid2@example.com", password: "qwerty"}}, headers: { "Content-Type" => "application/json" }
-      response.status.must_equal 403
+      response.status.must_equal 401
       json = JSON.parse(response.body)
       json["status"].must_equal "fail"
       json["token"].must_be_nil

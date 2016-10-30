@@ -1,7 +1,5 @@
 class Field < ActiveRecord::Base
   class Create < Trailblazer::Operation
-    include Resolver
-
     include Model
     model Field, :create
 
@@ -15,11 +13,13 @@ class Field < ActiveRecord::Base
   end
 
   class Show < Trailblazer::Operation
-    include Model
-    model Field, :find
-
     include Trailblazer::Operation::Representer
+    include Resolver
     representer Representer::Show
+
+    def self.model!(params)
+      params[:user].fields.find(params[:id])
+    end
 
     def process(*)
     end

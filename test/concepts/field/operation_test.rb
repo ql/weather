@@ -32,13 +32,14 @@ class FieldOperationTest < MiniTest::Spec
     it "retrieves field" do
       f = field
 
-      res, op = ::Field::Show.run(id: f.id)
+      res, op = ::Field::Show.run(id: f.id, user: f.user)
       res.must_equal true
       op.model.must_equal f
     end
 
     it "uses correct representation" do
-      json = ::Field::Show.present(id: field.id).to_json
+      f = field
+      json = ::Field::Show.present(id: f.id, user: f.user).to_json
       json.must_equal({"name"=>"TestField", "area"=>364044.06, "center_lat"=>55.55755538087183, "center_lon"=>37.40004197201306}.to_json)
     end
   end

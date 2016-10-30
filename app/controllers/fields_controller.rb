@@ -14,6 +14,8 @@ class FieldsController < JsonController
 
   def show
     respond Field::Show
+    rescue ActiveRecord::RecordNotFound
+      render json: {}, status: 404
   end
 
   def update

@@ -18,7 +18,7 @@ class UsersController < JsonController
       return
     end
 
-    render json: {status: :fail, errors: op.errors}, status: 403
+    render json: {status: :fail, errors: op.errors}, status: 401
   end
 
   def sign_out
