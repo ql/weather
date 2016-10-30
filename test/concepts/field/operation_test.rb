@@ -12,13 +12,13 @@ class FieldOperationTest < MiniTest::Spec
           boundary:   geojson
         }
       )
-      comment = op.model
+      field = op.model
 
-      comment.persisted?.must_equal true
-      comment.name.must_equal "TestField!"
-      comment.area.must_equal 364044.06
-      comment.center_lat.must_equal 55.55755538087183
-      comment.center_lon.must_equal 37.40004197201306
+      field.persisted?.must_equal true
+      field.name.must_equal "TestField!"
+      field.area.must_equal 364044.06
+      field.center_lat.must_equal 55.55755538087183
+      field.center_lon.must_equal 37.40004197201306
     end
 
     it "do not persists invalid" do
