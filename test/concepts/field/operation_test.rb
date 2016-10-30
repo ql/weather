@@ -6,16 +6,10 @@ class FieldOperationTest < MiniTest::Spec
 
   describe "Create" do
     it "persists valid" do
-      res, op = ::Field::Create.run(
-        field: {
-          name:       "TestField!",
-          boundary:   geojson
-        }
-      )
-      field = op.model
+      field = field()
 
       field.persisted?.must_equal true
-      field.name.must_equal "TestField!"
+      field.name.must_equal "TestField"
       field.area.must_equal 364044.06
       field.center_lat.must_equal 55.55755538087183
       field.center_lon.must_equal 37.40004197201306
