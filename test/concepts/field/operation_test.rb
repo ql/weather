@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class FieldOperationTest < MiniTest::Spec
-  let (:field) { ::Field::Create.(field: {name: "TestField", boundary: geojson}).model }
+  let (:user) { ::User::SignUp.(user: {name: "Test User", email: "user@example.com", password: "qwerty"}).model }
+  let (:field) { ::Field::Create.(field: {name: "TestField", boundary: geojson, user: user()}).model }
   let (:geojson) { File.read(Rails.root.join('test', 'fixtures', 'files', 'field.geojson')) }
 
   describe "Create" do
@@ -13,6 +14,7 @@ class FieldOperationTest < MiniTest::Spec
       field.area.must_equal 364044.06
       field.center_lat.must_equal 55.55755538087183
       field.center_lon.must_equal 37.40004197201306
+      field.user.must_equal user
     end
 
     it "do not persists invalid" do

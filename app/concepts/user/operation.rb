@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
       property :name
       property :email
       property :password
+      property :token
 
       validates :name, presence: true
       validates :email, email: true, unique: true
@@ -18,6 +19,7 @@ class User < ActiveRecord::Base
     def process(params)
       validate(params[:user]) do |contract|
         contract.password = digest(contract.password)
+        contract.token = SecureRandom.hex(13)
         contract.sync
         contract.save # save User with email.
       end
@@ -61,7 +63,10 @@ class User < ActiveRecord::Base
   end
 
   class SignOut < Trailblazer::Operation
-    #TODO
+    def process(params)
+      user = params[:user]
+      user.update_attribute(:token, SecureRandom.hex(13))
+    end
   end
 
   class Update < Trailblazer::Operation

@@ -1,2 +1,2 @@
-class JsonController < ActionController::API
+class JsonController < ApplicationController
 end

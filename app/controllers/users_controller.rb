@@ -1,6 +1,8 @@
 class UsersController < JsonController
   respond_to :json
 
+  before_action :authenticate, only: [:sign_out]
+
   def sign_up
     op = run User::SignUp do |o|
       render({json: {status: :success, id: o.model.id}})
@@ -12,15 +14,18 @@ class UsersController < JsonController
 
   def sign_in
     op = run User::SignIn do |op|
-      render json: {token:  op.model.token}
+      render json: {status: :success, token:  op.model.token}
       return
     end
 
-    render json: {status: :fail, errors: op.errors}
+    render json: {status: :fail, errors: op.errors}, status: 403
   end
 
   def sign_out
-    #TODO
+    run User::SignOut, params: {user: current_user} do |op|
+      render json: {status: :success}
+      return
+    end
   end
 
   def update

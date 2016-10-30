@@ -1,6 +1,7 @@
 class FieldsController < JsonController
   respond_to :json
 
+  before_action :authenticate
   def index
   end
 

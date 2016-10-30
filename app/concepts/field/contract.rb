@@ -6,7 +6,10 @@ class Field < ActiveRecord::Base
       property :area
       property :center_lat
       property :center_lon
+      property :user
 
+
+      validates :user, presence: :true
       validates :name, presence: true
       validate :boundary do |model|
         begin
