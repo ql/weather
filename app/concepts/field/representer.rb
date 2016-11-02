@@ -15,6 +15,9 @@ class Field < ActiveRecord::Base
       property :area
       property :center_lat
       property :center_lon
+
+      collection_representer class: Field
+
     end
   end
 end

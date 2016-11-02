@@ -1,8 +1,9 @@
 class FieldsController < JsonController
   respond_to :json
-
   before_action :authenticate
+
   def index
+    respond Field::Index
   end
 
   def create

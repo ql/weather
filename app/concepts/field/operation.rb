@@ -1,4 +1,18 @@
 class Field < ActiveRecord::Base
+  class Index < Trailblazer::Operation
+    include Collection
+    include Trailblazer::Operation::Representer
+
+    representer Representer::Show.for_collection
+
+    def model!(params)
+      params[:user].fields.all
+    end
+
+    def process(*)
+    end
+  end
+
   class Create < Trailblazer::Operation
     include Model
     model Field, :create
@@ -31,6 +45,10 @@ class Field < ActiveRecord::Base
     action :update
 
     contract Contract::Create
+
+    def self.model!(params)
+      params[:user].fields.find(params[:id])
+    end
   end
 
   class Delete < Trailblazer::Operation
@@ -39,6 +57,10 @@ class Field < ActiveRecord::Base
 
     def process(params)
       model.destroy
+    end
+
+    def self.model!(params)
+      params[:user].fields.find(params[:id])
     end
   end
 end

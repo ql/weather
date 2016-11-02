@@ -4,6 +4,6 @@ class JsonController < ApplicationController
   private
 
   def process_params!(params)
-    params.merge!(user: current_user) if current_user
+    params[:user] = current_user if current_user
   end
 end
