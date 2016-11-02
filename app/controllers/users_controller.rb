@@ -35,4 +35,12 @@ class UsersController < JsonController
   def delete
     #TODO
   end
+
+  def current_weather
+    #TODO
+  end
+
+  def weather_prediction
+    #TODO
+  end
 end
