@@ -25,7 +25,7 @@ class FieldsControllerTest < ActionController::TestCase
 
     user2 = ::User::SignUp.(user: {name: "User 2", email: "user2@example.com", password: "qwerty"}).model 
     field2 = ::Field::Create.(field: {name: "user2 field", boundary: geojson, user: user2}).model 
-    
+
     request.env['HTTP_AUTHORIZATION'] = "Token token=\"#{user1.token}\""
     get :index, format: :json
     response.status.must_equal 200

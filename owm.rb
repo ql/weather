@@ -17,15 +17,15 @@ class Owm
   private
 
   def extract(hash)
-    {
-      temp: temp2celsius(hash['main']['temp']),
+    Weather.new({
+      temperature: temp2celsius(hash['main']['temp']),
       humidity: hash['main']['humidity'],
       downfall: {
         snow: hash['snow'],
         rain: hash['rain']
       },
       pressure: hash['main']['pressure']
-    }
+    })
   end
 
   def temp2celsius(val)
