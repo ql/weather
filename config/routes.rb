@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/', to: 'main#index'
   resources :fields, format: :json do
     get :current_weather, on: :member
     get :future_weather, on: :member
