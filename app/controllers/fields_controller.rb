@@ -30,4 +30,12 @@ class FieldsController < JsonController
   def import
     #TODO TBD
   end
+
+  def current_weather
+    respond Field::CurrentWeather
+  end
+
+  def future_weather
+    respond Field::FutureWeather
+  end
 end

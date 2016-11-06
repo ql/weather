@@ -19,5 +19,9 @@ class Field < ActiveRecord::Base
       collection_representer class: Field
 
     end
+
+    class ShowWithWeather < Show
+      collection :weather_datapoints
+    end
   end
 end
