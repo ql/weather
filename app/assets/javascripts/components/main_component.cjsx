@@ -127,20 +127,31 @@ module.exports = MainComponent = React.createClass
     </form>
 
   renderFields: ->
-    <div class="row">
-      <div class="three columns">
-        <h4>Ваши поля</h4>
-        <ol>
-          { for field in @token.fields
-            <li><a href="#"> {field.name} </a></li>
-          }
-        </ol>
+    <form>
+      <div className="row">
+        <div className="three columns">
+          <h5>Ваши поля</h5>
+          <ol>
+            { for field in @state.fields
+              <li><a href="#"> {field.name} </a></li>
+            }
+          </ol>
+          { (@state.fields == []) && "У вас нету полей"}
+
+          <h5>Добавить</h5>
+          <label for="fieldName">Название поля</label>
+          <input className="u-full-width" type="text"  id="fieldName" />
+
+          <label for="fieldBoundary">Граница поля (GeoJSON)</label>
+          <textarea className="u-full-width" type="text"  id="fieldBoundar" />
+          <input className="button-primary" type="submit" value="Добавить" onClick={@addField} />
+        </div>
+        <div className="nine columns">
+          <h5>На карте</h5>
+          <div id="map"></div>
+        </div>
       </div>
-      <div class="nine columns">
-        <h4>На карте</h4>
-        <div id="map"></div>
-      </div>
-    </div>
+    </form>
 
 
   render: ->
@@ -159,7 +170,7 @@ module.exports = MainComponent = React.createClass
       </div>
       }
 
-      { (@state.fields.length > 0) &&
-         @renderFields()
+      { @state.token &&
+        @renderFields()
       }
     </div>
