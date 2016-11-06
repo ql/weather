@@ -23,6 +23,7 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'multi_json'
 gem 'trailblazer'
 gem 'rgeo'
 gem 'rgeo-geojson'
