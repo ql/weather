@@ -14,7 +14,7 @@ class UsersController < JsonController
 
   def sign_in
     op = run User::SignIn do |op|
-      render json: {status: :success, token:  op.model.token}
+      render json: {status: :success, token:  op.model.token, name: op.model.name} #TODO representers
       return
     end
 

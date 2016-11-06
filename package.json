@@ -1,0 +1,25 @@
+{
+  "name": "weather_frontend",
+  "version": "0.0.1",
+  "description": "== README",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "browserify": "~10.2.4",
+    "coffee-reactify": "*",
+    "babel-preset-es2015": "*",
+    "browserify-incremental": "^3.0.1",
+    "react": "~15.3",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2",
+    "react-dom": "~15.3",
+    "react-dropzone": "^3.6.0",
+    "react-select": "^1.0.0-rc.2",
+    "jquery": "*",
+    "jquery-ujs": "*",
+    "react-google-maps": "5.1.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

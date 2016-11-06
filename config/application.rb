@@ -10,7 +10,7 @@ module Weather
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/app/services)
 
-    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 react ] ]"
+    #config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 react ] ]"
 
 
     unless Rails.env.production?
@@ -18,6 +18,9 @@ module Weather
             p.start_with?(Rails.root.join("spec/javascripts").to_s)
         }
     end
+
+    config.browserify_rails.source_map_environments << "development"
+    config.browserify_rails.commandline_options = "--transform coffee-reactify --extension=\".cjsx\" --extension=\".coffee\""
   end
 end
 
