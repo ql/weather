@@ -12,20 +12,36 @@ module.exports = MainComponent = React.createClass
       email: "",
       password: "",
       password_confirmation: ""
+    },
+    newField: {
+      name: "",
+      boundary: ""
     }
 
 
-  setNewUser: (field) ->
+  setNewUser: (attr) ->
     (e) =>
       newUser = @state.newUser
-      newUser[field] = e.target.value
+      newUser[attr] = e.target.value
       @setState newUser: newUser, message: null
 
-  setUser: (field) ->
+  setUser: (attr) ->
     (e) =>
       user = @state.user
-      user[field] = e.target.value
+      user[attr] = e.target.value
       @setState user: user, message: null
+
+  setField: (attr) ->
+    (e) =>
+      field = @state.newField
+      field[attr] = e.target.value
+      @setState newField: field, message: null
+
+  setBoundary: (e) ->
+      field = @state.newField
+      field.boundary = JSON.parse(e.target.value)
+      @setState newField: field, message: null
+
 
   submitNewUser: (e) ->
     e.preventDefault()
@@ -54,6 +70,14 @@ module.exports = MainComponent = React.createClass
       'json'
     )
 
+  logIn: (e) ->
+    e.preventDefault()
+    $.post('/users/sign_in',
+      {session: @state.user}
+      @loggedIn,
+      'json'
+    )
+
   loggedIn: (d) ->
     @setState token: d.token
     @showMessage("Здравствуйте, #{d.name}")
@@ -64,10 +88,26 @@ module.exports = MainComponent = React.createClass
       url: '/fields',
       method: 'get',
       headers: {'Authorization': 'Token token="'+@state.token + '"'},
-      success: (d) ->
+      dataType: 'json',
+      success: (d) =>
         console.log(d)
-        @setState fields: d.fields
+        @setState fields: d
     )
+
+  addField: (e) ->
+    e.preventDefault()
+    $.ajax(
+      url: '/fields.json',
+      method: 'post',
+      dataType: 'json',
+      data: JSON.stringify({field: @state.newField}),
+      contentType: 'application/json',
+      headers: {'Authorization': 'Token token="'+@state.token + '"'},
+      success: (d) =>
+        @showMessage "Поле добавлено"
+        @fetchFields()
+    )
+
 
   showMessage: (m) ->
     @setState message: m
@@ -140,10 +180,10 @@ module.exports = MainComponent = React.createClass
 
           <h5>Добавить</h5>
           <label for="fieldName">Название поля</label>
-          <input className="u-full-width" type="text"  id="fieldName" />
+          <input className="u-full-width" type="text"  id="fieldName" onChange={@setField('name')} />
 
           <label for="fieldBoundary">Граница поля (GeoJSON)</label>
-          <textarea className="u-full-width" type="text"  id="fieldBoundar" />
+          <textarea className="u-full-width" type="text"  id="fieldBoundar" onChange={@setBoundary} />
           <input className="button-primary" type="submit" value="Добавить" onClick={@addField} />
         </div>
         <div className="nine columns">

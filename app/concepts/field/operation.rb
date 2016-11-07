@@ -20,9 +20,18 @@ class Field < ActiveRecord::Base
     contract Contract::Create
 
     def process(params)
+      puts params[:field][:boundary].inspect
       validate(params[:field]) do |f|
         f.save
       end
+    end
+
+    def params!(params)
+      {field: {
+        user: params[:user],
+        name: params[:field][:name],
+        boundary: params[:field][:boundary].to_unsafe_h,
+      }}
     end
   end
 
