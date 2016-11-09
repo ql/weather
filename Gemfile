@@ -44,3 +44,4 @@ gem "minitest-spec-rails"
 gem "trailblazer-rails" # if you are in rails.
 gem "email_validator"
 gem "bcrypt"
+gem "httparty"
