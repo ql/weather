@@ -24,7 +24,8 @@ class Owm
         snow: hash['snow'],
         rain: hash['rain']
       },
-      pressure: hash['main']['pressure']
+      pressure: hash['main']['pressure'],
+      timestamp: Time.at(hash['dt'].to_i),
     })
   end
 

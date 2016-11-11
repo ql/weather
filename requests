@@ -1,0 +1,2 @@
+curl -XGET http://localhost:3001/fields/1/current_weather -H 'Authorization: Token token="fc795e71e707f1226071a4ee48"'
+curl -XGET http://localhost:3001/fields/1/future_weather -H 'Authorization: Token token="fc795e71e707f1226071a4ee48"'

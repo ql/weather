@@ -4,12 +4,14 @@ class Weather
   attr_accessor :pressure
   attr_accessor :downfall
   attr_accessor :humidity
+  attr_accessor :timestamp
 
   def initialize(params)
     @temperature = params[:temperature]
     @humidity = params[:humidity]
     @pressure = params[:pressure]
     @downfall = params[:downfall]
+    @timestamp = params[:timestamp]
   end
 
   class Service
