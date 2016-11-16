@@ -7,10 +7,13 @@ class FieldsController < JsonController
   end
 
   def create
-   new_params = {field: {name: params[:field][:name], boundary: params[:field][:boundary].try(:to_unsafe_h), user: params[:user]}}
-   run Field::Create, params: new_params, is_document: false do |op|
+   new_params = {field: {name: params[:field][:name], boundary: params[:field][:boundary].try(:to_unsafe_h), user: @current_user}}
+   op = run Field::Create, params: new_params, is_document: false do |op|
      render json: {id: op.model.id}
+     return
    end
+
+   render json: {errors: op.errors}
   end
   
 

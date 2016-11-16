@@ -189,6 +189,20 @@ module.exports = MainComponent = React.createClass
         <div className="nine columns">
           <h5>На карте</h5>
           <div id="map"></div>
+          <table>
+            <tr>
+              <th> Поле </th>
+              <td> Площадь </td>
+              <td> Центр </td>
+            </tr>
+            { for field in @state.fields
+              <tr>
+                <th> { field.name } </th>
+                <td> { field.area } м<sup>2</sup> </td>
+                <td> { [field.center_lat, field.center_lon] } </td>
+              </tr>
+            }
+           </table>
         </div>
       </div>
     </form>
