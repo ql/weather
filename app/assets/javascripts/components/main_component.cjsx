@@ -196,10 +196,10 @@ module.exports = MainComponent = React.createClass
               <td> Центр </td>
             </tr>
             { for field in @state.fields
-              <tr>
+              <tr ref="{ field.id }">
                 <th> { field.name } </th>
                 <td> { field.area } м<sup>2</sup> </td>
-                <td> { [field.center_lat, field.center_lon] } </td>
+                <td> { field.center_lat }, {field.center_lon } </td>
               </tr>
             }
            </table>

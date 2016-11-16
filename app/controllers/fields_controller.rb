@@ -20,7 +20,7 @@ class FieldsController < JsonController
   def show
     respond Field::Show
     rescue ActiveRecord::RecordNotFound
-      render json: {}, status: 404
+      render json: {}, status: :not_found
   end
 
   def update
@@ -36,10 +36,14 @@ class FieldsController < JsonController
   end
 
   def current_weather
-    respond Field::CurrentWeather
+     respond Field::CurrentWeather
+    rescue ActiveRecord::RecordNotFound
+      render json: {}, status: :not_found
   end
 
   def future_weather
     respond Field::FutureWeather
+    rescue ActiveRecord::RecordNotFound
+      render json: {}, status: :not_found
   end
 end
