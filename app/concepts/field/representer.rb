@@ -11,6 +11,7 @@ class Field < ActiveRecord::Base
     class Show < Representable::Decorator
       include JSON
 
+      property :id
       property :name
       property :area
       property :center_lat
