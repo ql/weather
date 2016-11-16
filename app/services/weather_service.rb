@@ -3,11 +3,11 @@ require './owm.rb'
 class Weather
   class Service
     def initialize
-      @provider = Owm.new(Rails.secrets.open_weather_map_key)
+      @provider = Owm.new(Rails.application.secrets.open_weather_map_key)
     end
 
     def current_weather(location)
-      @provider.current(*location)
+      [@provider.current(*location)]
     end
     
     def future_weather(location)
